@@ -1,16 +1,23 @@
-import React from 'react'
-import './style.css'
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import "./style.css";
+import { Link } from "react-router-dom";
 const Login = () => {
+  const [login, setLogin] = useState({});
+
+  const loginSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <div className="authpages">
       <div className="formCard">
         <h2 className="form_headingText">Log In To Your Account</h2>
-        <form action="">
+        <form action="" onSubmit={loginSubmit}>
           <label for="" className="form_labelText">
             Username
           </label>
           <input
+            name="username"
+            onChange={(e) => setLogin({ ...login, username: e.target.value })}
             className="form_textInput"
             type="text"
             placeholder="Enter your username"
@@ -19,13 +26,18 @@ const Login = () => {
             Password
           </label>
           <input
+            name="password"
+            g
+            onChange={(e) => setLogin({ ...login, password: e.target.value })}
             className="form_textInput"
             type="password"
             placeholder="Enter your password"
           />
           <Link to="/home">
             {" "}
-            <button className="form_button">Log In</button>
+            <button type="submit" className="form_button">
+              Log In
+            </button>
           </Link>
           <Link className="form_linkText" to="/register">
             Create new account
@@ -34,6 +46,6 @@ const Login = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Login
+export default Login;
