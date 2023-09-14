@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../tailorAddPage/tailorAdd.css'
 
 import avatar from '../../assets/avatar.svg'
 import deleteimg from '../../assets/delete.svg'
 import product from "../../assets/product.png";
 const AddProduct = () => {
+  const [productDetails,setProductDetails]=useState({})
+
+  const productSubmission=(e)=>{
+    e.preventDefault();
+  }
   return (
-    <div className='pagebody'>
+    <div className="pagebody">
       <header>
         <ul>
           <li>
@@ -25,11 +30,15 @@ const AddProduct = () => {
       <section className="tailor_section">
         <div className="addTailor_container">
           <h1 className="addTailor_heading">ADD PRODUCT</h1>
-          <form action="">
+          <form onSubmit={productSubmission} action="">
             <label className="addTailor_labelText" for="">
               Title
             </label>
             <input
+              name="title"
+              onChange={(e) =>
+                setProductDetails({ ...productDetails, title: e.target.name })
+              }
               className="addTailor_textInput"
               type="text"
               placeholder="Enter the product title"
@@ -38,6 +47,10 @@ const AddProduct = () => {
               Size
             </label>
             <input
+              name="size"
+              onChange={(e) =>
+                setProductDetails({ ...productDetails, size: e.target.name })
+              }
               className="addTailor_textInput"
               type="text"
               placeholder="Enter the size"
@@ -46,6 +59,10 @@ const AddProduct = () => {
               Price
             </label>
             <input
+              name="price"
+              onChange={(e) =>
+                setProductDetails({ ...productDetails, price: e.target.name })
+              }
               className="addTailor_textInput"
               type="text"
               placeholder="Enter product price"
@@ -61,7 +78,9 @@ const AddProduct = () => {
               multiple
             />
             <div id="selectedImages"></div>
-            <button className="addTailor_addButton">Upload Product</button>
+            <button type="submit" className="addTailor_addButton">
+              Upload Product
+            </button>
           </form>
         </div>
         <div className="divider_line"></div>
@@ -86,7 +105,7 @@ const AddProduct = () => {
                   </div>
                   <h5
                     className="removeTailer_card_nameText"
-                    style={{marginTop : '10px',}}
+                    style={{ marginTop: "10px" }}
                   >
                     $10.70
                   </h5>

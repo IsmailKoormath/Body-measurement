@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './tailorAdd.css'
 
 import avatar from '../../assets/avatar.svg'
 import deleteIcon from "../../assets/delete.svg";
 
 const TailorAdd = () => {
+  const[tailorDetails,setTailorDetails]=useState({});
+
+  const AddTailor=(e)=>{
+    e.preventDefault();
+  }
   return (
     <div className="pagebody">
       <header>
@@ -25,19 +30,41 @@ const TailorAdd = () => {
       <section className="tailor_section">
         <div className="addTailor_container">
           <h1 className="addTailor_heading">ADD TAILOR</h1>
-          <form action="">
+          <form onSubmit={AddTailor} action="">
             <label className="addTailor_labelText" for="">
               Name
             </label>
             <input
+              name="name"
+              onChange={(e) =>
+                setTailorDetails({ ...tailorDetails, name: e.target.name })
+              }
               className="addTailor_textInput"
               type="text"
               placeholder="Enter tailor’s phone number"
             />
+
+            <label className="addTailor_labelText" for="">
+              phone
+            </label>
+            <input
+              name="phone"
+              onChange={(e) =>
+                setTailorDetails({ ...tailorDetails, phone: e.target.name })
+              }
+              className="addTailor_textInput"
+              type="text"
+              placeholder="Enter tailor's phone number"
+            />
+
             <label className="addTailor_labelText" for="">
               Username
             </label>
             <input
+              name="username"
+              onChange={(e) =>
+                setTailorDetails({ ...tailorDetails, username: e.target.name })
+              }
               className="addTailor_textInput"
               type="text"
               placeholder="Set tailor’s username"
@@ -46,11 +73,17 @@ const TailorAdd = () => {
               Password
             </label>
             <input
+              name="password"
+              onChange={(e) =>
+                setTailorDetails({ ...tailorDetails, password: e.target.name })
+              }
               className="addTailor_textInput"
               type="text"
               placeholder="Set tailor’s password"
             />
-            <button className="addTailor_addButton">Add Tailor</button>
+            <button type="submit" className="addTailor_addButton">
+              Add Tailor
+            </button>
           </form>
         </div>
         <div className="divider_line"></div>
@@ -59,7 +92,9 @@ const TailorAdd = () => {
           <div className="removeTailer_card_container">
             <div className="removeTailer_card">
               <img className="delete_icon" src={deleteIcon} alt="delete" />
-              <h5 className="removeTailer_card_nameText">Blue denim cotton jean</h5>
+              <h5 className="removeTailer_card_nameText">
+                Blue denim cotton jean
+              </h5>
               <div className="removeTailer_card_content">
                 <label className="removeTailer_card_label" for="">
                   Phone :
