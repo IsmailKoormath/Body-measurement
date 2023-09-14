@@ -1,0 +1,71 @@
+.authpages {
+  background: rgba(113, 113, 113, 0.1);
+  backdrop-filter: blur(75px);
+  height: 100vh;
+  display: grid;
+  place-items: center;
+    font-family: "Lato", sans-serif;
+}
+.formCard {
+  width: 380px;
+  padding: 10px;
+}
+.formCard form {
+  display: flex;
+  flex-direction: column;
+}
+.form_headingText {
+  color: #1a1a1a;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.form_labelText {
+  margin: 16px 0 0 16px;
+  color: #333;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+.form_textInput {
+    width: 100%;
+  margin-top: 6px;
+  padding: 10px 8px 10px 16px;
+  background: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  outline: none;
+}
+.form_textInput::placeholder {
+  color: #808080;
+  font-size: 15px;
+  font-weight: 400;
+}
+.form_button {
+    width: 100%;
+  margin-top: 40px;
+  padding: 10px 0;
+  background: #232229;
+  box-shadow: 6px 6px 0px 0px #fe6a3a;
+  color: #fffbf7;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  border: none;
+  cursor: pointer;
+}
+.form_button:active {
+  transform: translateX(2px) translateY(2px);
+  box-shadow: 4px 4px 0 0 #fe6a3a;
+}
+.form_linkText {
+  margin-left: auto;
+  margin-top: 17px;
+  color: #232229;
+  font-size: 15px;
+  font-weight: 400;
+  text-decoration: none;
+}

@@ -1,0 +1,190 @@
+.pagebody {
+  background: #fffbf7;
+  padding: 0 10%;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  font-family: "Lato", sans-serif;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0;
+  /* position: relative; */
+}
+
+header ul {
+  display: flex;
+  list-style: none;
+  gap: 50px;
+}
+
+header ul li {
+  color: #000;
+  font-size: 16px;
+  padding: 0 10px;
+}
+.active {
+  color: #fe6a3a;
+}
+header ul li a {
+  color: inherit;
+  text-decoration: none;
+}
+.avatar-image {
+  /* position: absolute; */
+  right: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.tailor_section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 130px;
+  padding-top: 80px;
+}
+.addTailor_container {
+  max-width: 350px;
+}
+.addTailor_heading {
+  color: #232229;
+  font-family: Goldman;
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+.addTailor_labelText {
+  margin: 16px 0 0 16px;
+  color: #333;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+.addTailor_textInput {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 8px 10px 16px;
+  background: #ffffff;
+  border: 1px solid #000;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  outline: none;
+}
+.addTailor_textInput::placeholder {
+  color: #808080;
+  font-size: 15px;
+  font-weight: 400;
+}
+.addTailor_addButton {
+  margin-top: 35px;
+  width: 100%;
+  background: #232229;
+  border: none;
+  padding: 10px 0;
+  color: #fffbf7;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+}
+
+.divider_line {
+  width: 5px;
+  height: 400px;
+  background: #f3f1ef;
+}
+
+.removeTailer_container {
+  width: 100%;
+}
+.removeTailer_card_container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: auto;
+  height: 450px;
+  padding: 10px;
+}
+.removeTailer_card_container::-webkit-scrollbar {
+  display: none;
+}
+.removeTailer_card {
+  padding: 16px 22px;
+  width: 100%;
+  border-radius: 10px;
+  background: #fddbbb;
+  box-shadow: -1px 2px 6px 0px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.removeTailer_card_nameText {
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+}
+.removeTailer_card_content {
+  margin-top: 10px;
+  display: flex;
+  gap: 15px;
+}
+.removeTailer_card_label {
+  color: #808080;
+  font-size: 16px;
+  font-weight: 400;
+}
+.removeTailer_card_span {
+  color: #232229;
+  font-size: 16px;
+  font-weight: 400;
+}
+.delete_icon {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  bottom: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.product_container {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+.product_image_container {
+  margin-left: -10px;
+  width: 92px;
+  height: 116px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.product_image_container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#selectedImages {
+  display: flex;
+}
+.imageBox {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.imageBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+

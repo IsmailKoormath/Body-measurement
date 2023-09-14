@@ -1,0 +1,141 @@
+.homePage {
+  background: #fffbf7;
+  padding: 0 8%;
+  font-family: "Inter", sans-serif;
+
+}
+
+
+.banner-section {
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.text-container {
+  border-bottom: 1px solid #000;
+  width: fit-content;
+}
+.text-container h1 {
+  font-size: 80px;
+  font-weight: 400;
+}
+.first-sec button {
+  padding: 16px 25px;
+  font-size: 14px;
+  margin-top: 50px;
+}
+.viw-all {
+  background: #000;
+  color: #fff;
+  border: none;
+  box-shadow: 6px 6px 0 0 #fe6a3a;
+}
+.viw-all:active {
+  transform: translateX(2px) translateY(2px);
+  box-shadow: 4px 4px 0 0 #fe6a3a;
+}
+
+.watch-now {
+  border: 1px solid #000;
+  color: #000;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+  margin-left: 50px;
+}
+.watch-now::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0%;
+  background: #000;
+  border-radius: 50% 50% 0 0;
+  z-index: -1;
+  transition: all 0.5s;
+}
+.watch-now:hover::before {
+  height: 180%;
+}
+.watch-now:hover {
+  color: #fff;
+}
+.second-sec {
+  width: 600px;
+  height: 450px;
+}
+.second-sec img {
+  width: 100%;
+  height: 100%;
+}
+
+.second-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 150px;
+}
+.second-banner h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #000;
+  line-height: 150%;
+  text-align: center;
+  max-width: 300px;
+}
+.group-image {
+  width: 700px;
+  height: 300px;
+}
+
+.featured-section {
+  margin-top: 150px;
+  margin-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+}
+.card-container {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  justify-content: center;
+}
+.card {
+  width: 350px;
+  height: 400px;
+  background-color: #44c3ebcc;
+}
+.featured-section h3 {
+  font-family: "Goldman", cursive;
+  font-size: 28px;
+  font-weight: 400;
+  color: #000;
+  text-align: center;
+}
+.card img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3/5;
+  object-fit: contain;
+}
+
+#sizeModalOverlay{
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+#sizeModalOverlay iframe {
+  width: 100%;
+  height: 100vh;
+}
+#closeModal {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+}

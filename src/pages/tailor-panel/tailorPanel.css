@@ -1,0 +1,135 @@
+
+
+.tailorPanerpage {
+  background: #fffbf7;
+  padding: 0 5%;
+  overflow: hidden;
+  height: 100vh;
+  font-family: "Lato", sans-serif;
+
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 30px 0;
+}
+header ul {
+  display: flex;
+  list-style: none;
+  gap: 50px;
+}
+
+header ul li {
+  color: #000;
+  font-size: 16px;
+  padding: 0 10px;
+  position: relative;
+}
+header ul li a {
+  color: inherit;
+  text-decoration: none;
+}
+.avatar-image {
+  width: 24px;
+  height: 24px;
+  margin-left: 150px;
+}
+
+.panel_section {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.panel_heding {
+  color: #232229;
+  font-family: Goldman;
+  font-size: 32px;
+  font-weight: 400;
+}
+.panel_card_container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: auto;
+  height: 520px;
+}
+.panel_card_container::-webkit-scrollbar {
+  display: none;
+}
+.panel_card {
+  max-width: 70%;
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  border-radius: 10px;
+  background: #bbedfd;
+  padding: 7px;
+  box-shadow: -1px 2px 6px 0px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.product_image_container {
+  width: 140px;
+  height: 180px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.product_image_container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.panel_card_nameText {
+  margin-top: 10px;
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+}
+.panel_card_content {
+  margin-top: 10px;
+  display: flex;
+  gap: 15px;
+}
+.panel_card_label {
+  color: #808080;
+  font-size: 16px;
+  font-weight: 400;
+}
+.panel_card_span {
+  color: #232229;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.whatsapp_container {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  background: #fdfdfd;
+  padding: 10px 35px 10px 12px;
+}
+.whatsapp_image {
+  width: 50px;
+  height: 50px;
+}
+.whatsapp_textContainer {
+  display: flex;
+  flex-direction: column;
+}
+.whatsapp_nameText {
+  color: #121329;
+  font-size: 18px;
+  font-weight: 600;
+}
+.whatsapp_numberText {
+  color: #696a78;
+  font-size: 16px;
+  font-weight: 500;
+}
