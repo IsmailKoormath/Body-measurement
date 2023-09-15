@@ -1,9 +1,8 @@
-import React from 'react'
-import './header.css'
+import React from "react";
+import "./header.css";
 
 import avatar from "../assets/avatar.svg";
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -11,25 +10,25 @@ const Header = () => {
       <header>
         <ul>
           <li>
-            <Link href="/home">HOME</Link>
+            <Link to="/home">HOME</Link>
           </li>
           <li>
-            <a href="/">SHOP</a>
+            <Link to="/home">SHOP</Link>
           </li>
           <li>
-            <a href="/">BEAUTY</a>
+            <Link to="/home">BEAUTY</Link>
           </li>
           <li>
-            <a href="/">SALE</a>
+            <Link to="/home">SALE</Link>
           </li>
           <li>
-            <a href="/">JOURNAL</a>
+            <Link to="/home">JOURNAL</Link>
           </li>
         </ul>
         <img className="avatar" src={avatar} alt="" />
       </header>
     </div>
   );
-}
+};
 
-export default Header
+export default Header;

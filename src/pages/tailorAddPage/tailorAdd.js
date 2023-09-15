@@ -1,27 +1,49 @@
-import React, { useState } from 'react'
-import './tailorAdd.css'
+import React, { useEffect, useState } from "react";
+import "./tailorAdd.css";
 
-import avatar from '../../assets/avatar.svg'
+import avatar from "../../assets/avatar.svg";
 import deleteIcon from "../../assets/delete.svg";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { axiosApi } from "../../api/axios-method";
 
 const TailorAdd = () => {
-  const[tailorDetails,setTailorDetails]=useState({});
+  const [addtailorDetails, setAddTailorDetails] = useState({});
+  const [tailors, setTailors] = useState([]);
 
-  const AddTailor=(e)=>{
+  // Add tailor
+  const AddTailor = async (e) => {
     e.preventDefault();
+    const result = await axios.post("", addtailorDetails);
+    console.log(result);
+  };
+
+  useEffect(() => {
+    // get all tailors
+    async function fetchData() {
+      const response = await axiosApi.get("");
+      setTailors(response.data);
+    }
+    fetchData();
+  }, [tailors]);
+
+  // delete tailor
+
+  const deletTailor= ()=>{
+    axiosApi.delete("",)
   }
   return (
     <div className="pagebody">
       <header>
         <ul>
           <li>
-            <a href="/index.html">HOME</a>
-          </li>
-          <li>
-            <a href="/add-product-page/addProduct.html">ADD PRODUCT</a>
+            <Link to="/home">HOME</Link>
           </li>
           <li className="active">
-            <a href="">ADD TAILOR</a>
+            <Link to="/addproduct">ADD PRODUCT</Link>
+          </li>
+          <li>
+            <Link to="/taileradd">ADD TAILOR</Link>
           </li>
         </ul>
         <img className="avatar-image" src={avatar} alt="" />
@@ -37,7 +59,10 @@ const TailorAdd = () => {
             <input
               name="name"
               onChange={(e) =>
-                setTailorDetails({ ...tailorDetails, name: e.target.name })
+                setAddTailorDetails({
+                  ...addtailorDetails,
+                  name: e.target.name,
+                })
               }
               className="addTailor_textInput"
               type="text"
@@ -50,7 +75,10 @@ const TailorAdd = () => {
             <input
               name="phone"
               onChange={(e) =>
-                setTailorDetails({ ...tailorDetails, phone: e.target.name })
+                setAddTailorDetails({
+                  ...addtailorDetails,
+                  phone: e.target.name,
+                })
               }
               className="addTailor_textInput"
               type="text"
@@ -63,7 +91,10 @@ const TailorAdd = () => {
             <input
               name="username"
               onChange={(e) =>
-                setTailorDetails({ ...tailorDetails, username: e.target.name })
+                setAddTailorDetails({
+                  ...addtailorDetails,
+                  username: e.target.name,
+                })
               }
               className="addTailor_textInput"
               type="text"
@@ -75,7 +106,10 @@ const TailorAdd = () => {
             <input
               name="password"
               onChange={(e) =>
-                setTailorDetails({ ...tailorDetails, password: e.target.name })
+                setAddTailorDetails({
+                  ...addtailorDetails,
+                  password: e.target.name,
+                })
               }
               className="addTailor_textInput"
               type="text"
@@ -90,35 +124,42 @@ const TailorAdd = () => {
         <div className="removeTailer_container">
           <h1 className="addTailor_heading">REMOVE TAILOR</h1>
           <div className="removeTailer_card_container">
-            <div className="removeTailer_card">
-              <img className="delete_icon" src={deleteIcon} alt="delete" />
-              <h5 className="removeTailer_card_nameText">
-                Blue denim cotton jean
-              </h5>
-              <div className="removeTailer_card_content">
-                <label className="removeTailer_card_label" for="">
-                  Phone :
-                </label>
-                <span className="removeTailer_card_span">+91 9876 34 5678</span>
+            {tailors.map((tailor) => (
+              <div className="removeTailer_card">
+                <img
+                  onClick={deletTailor}
+                  className="delete_icon"
+                  src={deleteIcon}
+                  alt="delete"
+                />
+                <h5 className="removeTailer_card_nameText">name</h5>
+                <div className="removeTailer_card_content">
+                  <label className="removeTailer_card_label" for="">
+                    Phone :
+                  </label>
+                  <span className="removeTailer_card_span">
+                    +91 9876 34 5678
+                  </span>
+                </div>
+                <div className="removeTailer_card_content">
+                  <label className="removeTailer_card_label" for="">
+                    Username :
+                  </label>
+                  <span className="removeTailer_card_span">hardik</span>
+                </div>
+                <div className="removeTailer_card_content">
+                  <label className="removeTailer_card_label" for="">
+                    Password :
+                  </label>
+                  <span className="removeTailer_card_span">hardik</span>
+                </div>
               </div>
-              <div className="removeTailer_card_content">
-                <label className="removeTailer_card_label" for="">
-                  Username :
-                </label>
-                <span className="removeTailer_card_span">hardik</span>
-              </div>
-              <div className="removeTailer_card_content">
-                <label className="removeTailer_card_label" for="">
-                  Password :
-                </label>
-                <span className="removeTailer_card_span">hardik</span>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
     </div>
   );
-}
+};
 
 export default TailorAdd;

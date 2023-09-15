@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import "../authentication/style.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { axiosApi } from "../../api/axios-method";
 const FindSize = () => {
   const [sizes, setSizes] = useState({});
+  const navigate = useNavigate();
 
-  const submitSizes = (e) => {
+
+  const submitSizes =async (e) => {
     e.preventDefault();
+    const response = await axiosApi.post("", sizes);
+    console.log('====================================');
+    console.log(response);
+    console.log('====================================');
+    navigate('/canvas');
   };
+  
   return (
     <div className="authpages">
       <div className="formCard">

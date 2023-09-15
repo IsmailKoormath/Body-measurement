@@ -1,27 +1,44 @@
-import React, { useState } from 'react'
-import '../tailorAddPage/tailorAdd.css'
+import React, { useEffect, useState } from "react";
+import "../tailorAddPage/tailorAdd.css";
 
-import avatar from '../../assets/avatar.svg'
-import deleteimg from '../../assets/delete.svg'
+import avatar from "../../assets/avatar.svg";
+import deleteimg from "../../assets/delete.svg";
 import product from "../../assets/product.png";
-const AddProduct = () => {
-  const [productDetails,setProductDetails]=useState({})
 
-  const productSubmission=(e)=>{
+import { axiosApi } from "../../api/axios-method";
+import { Link } from "react-router-dom";
+
+const AddProduct = () => {
+  const [addproductDetails, setAddProductDetails] = useState({});
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axiosApi.get("");
+      setProducts(response.data);
+    }
+    fetchData();
+  }, [products]);
+
+  const productSubmission = async (e) => {
     e.preventDefault();
-  }
+    const response = await axiosApi.post("", addproductDetails);
+    console.log(response);
+  };
+
   return (
     <div className="pagebody">
       <header>
         <ul>
           <li>
-            <a href="/index.html">HOME</a>
+            <Link to="/home">HOME</Link>
           </li>
           <li className="active">
-            <a href="">ADD PRODUCT</a>
+            <Link to="/addproduct">ADD PRODUCT</Link>
           </li>
           <li>
-            <a href="/tailor-add-page/tailorAdd.html">ADD TAILOR</a>
+            <Link to="/taileradd">ADD TAILOR</Link>
           </li>
         </ul>
         <img className="avatar-image" src={avatar} alt="" />
@@ -37,7 +54,10 @@ const AddProduct = () => {
             <input
               name="title"
               onChange={(e) =>
-                setProductDetails({ ...productDetails, title: e.target.name })
+                setAddProductDetails({
+                  ...addproductDetails,
+                  title: e.target.name,
+                })
               }
               className="addTailor_textInput"
               type="text"
@@ -49,7 +69,10 @@ const AddProduct = () => {
             <input
               name="size"
               onChange={(e) =>
-                setProductDetails({ ...productDetails, size: e.target.name })
+                setAddProductDetails({
+                  ...addproductDetails,
+                  size: e.target.name,
+                })
               }
               className="addTailor_textInput"
               type="text"
@@ -61,7 +84,10 @@ const AddProduct = () => {
             <input
               name="price"
               onChange={(e) =>
-                setProductDetails({ ...productDetails, price: e.target.name })
+                setAddProductDetails({
+                  ...addproductDetails,
+                  price: e.target.name,
+                })
               }
               className="addTailor_textInput"
               type="text"
@@ -87,36 +113,38 @@ const AddProduct = () => {
         <div className="removeTailer_container">
           <h1 className="addTailor_heading">REMOVE PRODUCTS</h1>
           <div className="removeTailer_card_container">
-            <div className="removeTailer_card">
-              <img className="delete_icon" src={deleteimg} alt="delete" />
-              <div className="product_container">
-                <div className="product_image_container">
-                  <img src={product} alt="product" />
-                </div>
-                <div>
-                  <h5 className="removeTailer_card_nameText">
-                    Blue denim cotton jean
-                  </h5>
-                  <div className="removeTailer_card_content">
-                    <label className="removeTailer_card_label" for="">
-                      Size :
-                    </label>
-                    <span className="removeTailer_card_span">M</span>
+            {products.map((prod) => (
+              <div className="removeTailer_card">
+                <img className="delete_icon" src={deleteimg} alt="delete" />
+                <div className="product_container">
+                  <div className="product_image_container">
+                    <img src={product} alt="product" />
                   </div>
-                  <h5
-                    className="removeTailer_card_nameText"
-                    style={{ marginTop: "10px" }}
-                  >
-                    $10.70
-                  </h5>
+                  <div>
+                    <h5 className="removeTailer_card_nameText">
+                      Blue denim cotton jean
+                    </h5>
+                    <div className="removeTailer_card_content">
+                      <label className="removeTailer_card_label" for="">
+                        Size :
+                      </label>
+                      <span className="removeTailer_card_span">M</span>
+                    </div>
+                    <h5
+                      className="removeTailer_card_nameText"
+                      style={{ marginTop: "10px" }}
+                    >
+                      $10.70
+                    </h5>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
     </div>
   );
-}
+};
 
-export default AddProduct
+export default AddProduct;

@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import "./style.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { axiosApi } from "../../api/axios-method";
 const Register = () => {
-  const [userdata, setUserdata] = useState({});
 
-  const handleRegister = (e) => {
+  const [userdata, setUserdata] = useState({});
+  const navigate = useNavigate();
+
+  const handleRegister = async(e) => {
     e.preventDefault();
+    const result = await axiosApi.post("", userdata);
+    console.log(result);
+    navigate("/login");
+    
   };
   return (
     <div className="authpages">

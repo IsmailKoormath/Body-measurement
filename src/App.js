@@ -10,7 +10,7 @@ import Home from "./pages/homePage/home";
 import Tailorpanel from "./pages/tailor-panel/tailor-panel";
 import TailorAdd from "./pages/tailorAddPage/tailorAdd";
 import SingleProduct from "./pages/singleProduct/singleProduct";
-import Webcam from "./pages/webcam/webcam";
+import Webcam from "./pages/skelton/webcam";
 
 function App() {
   return (

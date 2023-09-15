@@ -159,7 +159,7 @@ header ul li a {
   gap: 20px;
 }
 .product_image_container {
-  margin-left: -10px;
+  /* margin-left: -10px; */
   width: 92px;
   height: 116px;
   border-radius: 5px;

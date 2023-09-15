@@ -1,12 +1,32 @@
 import React, { useState } from "react";
 import "./style.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { axiosApi } from "../../api/axios-method";
 const Login = () => {
-  const [login, setLogin] = useState({});
+  const [loginData, setLoginData] = useState({});
 
-  const loginSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const loginSubmit = async (e) => {
     e.preventDefault();
+    const result = await axiosApi.post("", loginData);
+    console.log(result);
+    if (result?.data?.token) {
+      sessionStorage.setItem("token", result.data.token);
+    }
+    if (result?.data?.role) {
+      sessionStorage.setItem("role", result.data.role);
+    }
+    if (result.data.role === "admin") {
+      navigate("/admin");
+    }
+    if (result.data.role === "tailor") {
+      navigate("/tailerpanel");
+    } else {
+      navigate("/");
+    }
   };
+  
   return (
     <div className="authpages">
       <div className="formCard">
@@ -17,7 +37,9 @@ const Login = () => {
           </label>
           <input
             name="username"
-            onChange={(e) => setLogin({ ...login, username: e.target.value })}
+            onChange={(e) =>
+              setLoginData({ ...loginData, username: e.target.value })
+            }
             className="form_textInput"
             type="text"
             placeholder="Enter your username"
@@ -28,7 +50,9 @@ const Login = () => {
           <input
             name="password"
             g
-            onChange={(e) => setLogin({ ...login, password: e.target.value })}
+            onChange={(e) =>
+              setLoginData({ ...loginData, password: e.target.value })
+            }
             className="form_textInput"
             type="password"
             placeholder="Enter your password"
