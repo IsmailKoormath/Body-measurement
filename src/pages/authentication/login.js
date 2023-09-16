@@ -9,11 +9,14 @@ const Login = () => {
 
   const loginSubmit = async (e) => {
     e.preventDefault();
-    const result = await axiosApi.post("", loginData);
+    const result = await axiosApi.post(
+      "http://192.168.57.27:6000/auth/signin",
+      loginData
+    );
     console.log(result);
-    if (result?.data?.token) {
+    if (result?.data?.token ) {
       sessionStorage.setItem("token", result.data.token);
-    }
+    
     if (result?.data?.role) {
       sessionStorage.setItem("role", result.data.role);
     }
@@ -25,6 +28,7 @@ const Login = () => {
     } else {
       navigate("/");
     }
+  }
   };
   
   return (

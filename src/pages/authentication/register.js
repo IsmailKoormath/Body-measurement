@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
-import { axiosApi } from "../../api/axios-method";
+import axios from "axios";
 const Register = () => {
 
   const [userdata, setUserdata] = useState({});
@@ -9,11 +9,19 @@ const Register = () => {
 
   const handleRegister = async(e) => {
     e.preventDefault();
-    const result = await axiosApi.post("", userdata);
+    const result = await axios.post(
+      "http://192.168.57.27:6000/auth/signup/user",
+      userdata
+    );
     console.log(result);
-    navigate("/login");
-    
+    if (result.status == 200) {
+      navigate("/login");
+    }
+    // if(result.status == 400){
+    //   result.data.
+    // }
   };
+
   return (
     <div className="authpages">
       <div className="formCard">
@@ -55,10 +63,7 @@ const Register = () => {
             type="number"
             placeholder="Enter your phone number"
           />
-          <Link to="/">
-            {" "}
             <button type="submit" className="form_button">Sign Up</button>
-          </Link>
           <Link className="form_linkText" to="/">
             Already have an account
           </Link>
