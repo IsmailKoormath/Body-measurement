@@ -3,7 +3,6 @@ import "./tailorAdd.css";
 
 import avatar from "../../assets/avatar.svg";
 import deleteIcon from "../../assets/delete.svg";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { axiosApi } from "../../api/axios-method";
 
@@ -14,18 +13,18 @@ const TailorAdd = () => {
   // Add tailor
   const AddTailor = async (e) => {
     e.preventDefault();
-    const result = await axios.post("", addtailorDetails);
+    const result = await axiosApi.post("/auth/signup/tailor", addtailorDetails);
     console.log(result);
   };
 
   useEffect(() => {
     // get all tailors
-    async function fetchData() {
-      const response = await axiosApi.get("");
-      setTailors(response.data);
-    }
-    fetchData();
-  }, [tailors]);
+    // async function fetchData() {
+    //   const response = await axiosApi.get("/order/get/all");
+    //   setTailors(response.data);
+    // }
+    // fetchData();
+  }, []);
 
   // delete tailor
 
@@ -53,7 +52,7 @@ const TailorAdd = () => {
         <div className="addTailor_container">
           <h1 className="addTailor_heading">ADD TAILOR</h1>
           <form onSubmit={AddTailor} action="">
-            <label className="addTailor_labelText" for="">
+            <label className="addTailor_labelText">
               Name
             </label>
             <input
@@ -69,7 +68,7 @@ const TailorAdd = () => {
               placeholder="Enter tailor’s phone number"
             />
 
-            <label className="addTailor_labelText" for="">
+            <label className="addTailor_labelText">
               phone
             </label>
             <input
@@ -85,7 +84,7 @@ const TailorAdd = () => {
               placeholder="Enter tailor's phone number"
             />
 
-            <label className="addTailor_labelText" for="">
+            <label className="addTailor_labelText">
               Username
             </label>
             <input
@@ -100,7 +99,7 @@ const TailorAdd = () => {
               type="text"
               placeholder="Set tailor’s username"
             />
-            <label className="addTailor_labelText" for="">
+            <label className="addTailor_labelText">
               Password
             </label>
             <input
@@ -134,7 +133,7 @@ const TailorAdd = () => {
                 />
                 <h5 className="removeTailer_card_nameText">name</h5>
                 <div className="removeTailer_card_content">
-                  <label className="removeTailer_card_label" for="">
+                  <label className="removeTailer_card_label">
                     Phone :
                   </label>
                   <span className="removeTailer_card_span">
@@ -142,13 +141,13 @@ const TailorAdd = () => {
                   </span>
                 </div>
                 <div className="removeTailer_card_content">
-                  <label className="removeTailer_card_label" for="">
+                  <label className="removeTailer_card_label">
                     Username :
                   </label>
                   <span className="removeTailer_card_span">hardik</span>
                 </div>
                 <div className="removeTailer_card_content">
-                  <label className="removeTailer_card_label" for="">
+                  <label className="removeTailer_card_label">
                     Password :
                   </label>
                   <span className="removeTailer_card_span">hardik</span>

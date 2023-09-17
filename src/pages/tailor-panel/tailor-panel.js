@@ -9,17 +9,17 @@ import { axiosApi } from "../../api/axios-method";
 import { useNavigate } from "react-router-dom";
 const Tailorpanel = () => {
 
-  const [tailors, setTailors] =  useState([]);
+  const [orders, setOrders] =  useState([]);
 
   const navigate = useNavigate()
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axiosApi.post("");
-      setTailors(response.data);
+      const response = await axiosApi.get("/order/get/all");
+      setOrders(response.data);
     }
     fetchData();
-  }, [tailors]);
+  }, []);
 
   const handleLogout=async()=>{
     localStorage.clear();
@@ -56,7 +56,7 @@ const Tailorpanel = () => {
       <section className="panel_section">
         <h1 className="panel_heding">TAILOR PANEL</h1>
         <div className="panel_card_container">
-          {tailors.map((tailor) => (
+          {orders.map((tailor) => (
             <div className="panel_card">
               <div className="whatsapp_container">
                 <img className="whatsapp_image" src={whatsapp} alt="whatsapp" />
@@ -71,27 +71,19 @@ const Tailorpanel = () => {
               <div>
                 <h5 className="panel_card_nameText">Blue denim cotton jean</h5>
                 <div className="panel_card_content">
-                  <label className="panel_card_label" for="">
-                    Size :
-                  </label>
+                  <label className="panel_card_label">Size :</label>
                   <span className="panel_card_span">M</span>
                 </div>
                 <div className="panel_card_content">
-                  <label className="panel_card_label" for="">
-                    Chest :
-                  </label>
+                  <label className="panel_card_label">Chest :</label>
                   <span className="panel_card_span">32</span>
                 </div>
                 <div className="panel_card_content">
-                  <label className="panel_card_label" for="">
-                    Shoulder :
-                  </label>
+                  <label className="panel_card_label">Shoulder :</label>
                   <span className="panel_card_span">17.5</span>
                 </div>
                 <div className="panel_card_content">
-                  <label className="panel_card_label" for="">
-                    Length :
-                  </label>
+                  <label className="panel_card_label">Length :</label>
                   <span className="panel_card_span">27.5</span>
                 </div>
               </div>

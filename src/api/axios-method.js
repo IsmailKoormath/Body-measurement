@@ -1,7 +1,8 @@
 import axios from "axios";
 
 // export const BASICURL = "http://192.168.29.217:5000";
-export const BASICURL = "http://192.168.57.27:6000";
+// export const BASICURL = "http://192.168.57.27:5000";
+export const BASICURL = "http://192.168.43.217:5000";
 
 export const axiosApi = axios.create({
   baseURL: BASICURL,

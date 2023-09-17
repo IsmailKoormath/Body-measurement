@@ -3,29 +3,65 @@ import "../tailorAddPage/tailorAdd.css";
 
 import avatar from "../../assets/avatar.svg";
 import deleteimg from "../../assets/delete.svg";
-import product from "../../assets/product.png";
 
 import { axiosApi } from "../../api/axios-method";
 import { Link } from "react-router-dom";
 
 const AddProduct = () => {
-  const [addproductDetails, setAddProductDetails] = useState({});
-
+  const [productData, setProductData] = useState({
+    title: "",
+    size: "",
+    price: "",
+    product: null,
+  });
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await axiosApi.get("");
-      setProducts(response.data);
-    }
     fetchData();
-  }, [products]);
+  }, []);
+
+  async function fetchData() {
+    try {
+      const response = await axiosApi.get("/product/get/all");
+      setProducts(response.data.product);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  }
 
   const productSubmission = async (e) => {
     e.preventDefault();
-    const response = await axiosApi.post("", addproductDetails);
-    console.log(response);
+
+    const formData = new FormData();
+    formData.append("title", productData.title);
+    formData.append("size", productData.size);
+    formData.append("price", productData.price);
+
+    if (productData.product) {
+      formData.append("product", productData.product);
+    }
+
+    try {
+      const response = await axiosApi.post("/product/new", formData);
+      console.log(response);
+      // Clear form fields and update product list if needed
+      setProductData({
+        title: "",
+        size: "",
+        price: "",
+        product: null,
+      });
+      fetchData();
+    } catch (error) {
+      console.error("Error submitting product:", error);
+    }
   };
+
+  const deleteProduct = async(productId)=>{
+    const response = await axiosApi.post(`/product/delete/${productId}`);
+    console.log(response);
+    fetchData();
+  }
 
   return (
     <div className="pagebody">
@@ -48,60 +84,63 @@ const AddProduct = () => {
         <div className="addTailor_container">
           <h1 className="addTailor_heading">ADD PRODUCT</h1>
           <form onSubmit={productSubmission} action="">
-            <label className="addTailor_labelText" for="">
-              Title
-            </label>
+            <label className="addTailor_labelText">Title</label>
             <input
               name="title"
               onChange={(e) =>
-                setAddProductDetails({
-                  ...addproductDetails,
-                  title: e.target.name,
+                setProductData({
+                  ...productData,
+                  title: e.target.value,
                 })
               }
+              value={productData.title}
               className="addTailor_textInput"
               type="text"
               placeholder="Enter the product title"
             />
-            <label className="addTailor_labelText" for="">
-              Size
-            </label>
+            <label className="addTailor_labelText">Size</label>
             <input
               name="size"
               onChange={(e) =>
-                setAddProductDetails({
-                  ...addproductDetails,
-                  size: e.target.name,
+                setProductData({
+                  ...productData,
+                  size: e.target.value,
                 })
               }
+              value={productData.size}
               className="addTailor_textInput"
               type="text"
               placeholder="Enter the size"
             />
-            <label className="addTailor_labelText" for="">
-              Price
-            </label>
+            <label className="addTailor_labelText">Price</label>
             <input
               name="price"
               onChange={(e) =>
-                setAddProductDetails({
-                  ...addproductDetails,
-                  price: e.target.name,
+                setProductData({
+                  ...productData,
+                  price: e.target.value,
                 })
               }
+              value={productData.price}
               className="addTailor_textInput"
               type="text"
               placeholder="Enter product price"
             />
-            <label className="addTailor_labelText" for="">
+            <label className="addTailor_labelText">
               Add 4 Images of your product
             </label>
             <input
+              name="product"
+              type="file"
+              onChange={(e) =>
+                setProductData({
+                  ...productData,
+                  product: e.target.files[0],
+                })
+              }
               className="addTailor_textInput"
               id="imagePicker"
-              type="file"
               accept="image/*"
-              multiple
             />
             <div id="selectedImages"></div>
             <button type="submit" className="addTailor_addButton">
@@ -114,27 +153,27 @@ const AddProduct = () => {
           <h1 className="addTailor_heading">REMOVE PRODUCTS</h1>
           <div className="removeTailer_card_container">
             {products.map((prod) => (
-              <div className="removeTailer_card">
+
+              <div onClick={()=>deleteProduct(prod._id)} className="removeTailer_card" key={prod.id}>
                 <img className="delete_icon" src={deleteimg} alt="delete" />
                 <div className="product_container">
                   <div className="product_image_container">
-                    <img src={product} alt="product" />
+                    <img src={prod.images[0].url} alt="product" />
                   </div>
                   <div>
-                    <h5 className="removeTailer_card_nameText">
-                      Blue denim cotton jean
-                    </h5>
+                    <h5 className="removeTailer_card_nameText">{prod.title}</h5>
                     <div className="removeTailer_card_content">
-                      <label className="removeTailer_card_label" for="">
-                        Size :
-                      </label>
-                      <span className="removeTailer_card_span">M</span>
+                      <label className="removeTailer_card_label">Size :</label>
+                      <span className="removeTailer_card_span">
+                        {" "}
+                        {prod.size}
+                      </span>
                     </div>
                     <h5
                       className="removeTailer_card_nameText"
                       style={{ marginTop: "10px" }}
                     >
-                      $10.70
+                      ${prod.price}
                     </h5>
                   </div>
                 </div>

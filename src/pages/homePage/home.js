@@ -17,11 +17,11 @@ const Home = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axiosApi.post("");
-      setCollections(response.data);
+      const response = await axiosApi.get("/product/get/all");
+      setCollections(response.data.product);
     }
     fetchData();
-  }, [collections]);
+  }, []);
 
   const role = localStorage.getItem("role");
   return (
@@ -72,11 +72,11 @@ const Home = () => {
         <h3>FEATURED STYLES</h3>
         <div className="card-container">
           {/* List  all product */}
-          {collections.map((product) => {
+          {collections.map((product) => (
             <div className="card">
-              <img src={shirt1} alt="" />
-            </div>;
-          })}
+              <img src={product.images[0].url} alt="" />
+            </div>
+          ))}
           {/* 
           <div className="card">
             <img src={shirt2} alt="" />

@@ -10,12 +10,12 @@ const Register = () => {
   const handleRegister = async(e) => {
     e.preventDefault();
     const result = await axios.post(
-      "http://192.168.57.27:6000/auth/signup/user",
+      "http://192.168.43.217:5000/auth/signup/user",
       userdata
     );
     console.log(result);
-    if (result.status == 200) {
-      navigate("/login");
+    if (result.status === 200) {
+      navigate("/");
     }
     // if(result.status == 400){
     //   result.data.
@@ -27,7 +27,7 @@ const Register = () => {
       <div className="formCard">
         <h2 className="form_headingText">Create your account</h2>
         <form action="" onSubmit={handleRegister}>
-          <label for="" className="form_labelText">
+          <label  className="form_labelText">
             Username
           </label>
           <input
@@ -39,7 +39,7 @@ const Register = () => {
             type="text"
             placeholder="Enter your username"
           />
-          <label for="" className="form_labelText">
+          <label  className="form_labelText">
             Password
           </label>
           <input
@@ -51,7 +51,7 @@ const Register = () => {
             type="password"
             placeholder="Enter your password"
           />
-          <label for="" className="form_labelText">
+          <label  className="form_labelText">
             Phone Number
           </label>
           <input

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
-import { axiosApi } from "../../api/axios-method";
+import axios from "axios";
 const Login = () => {
   const [loginData, setLoginData] = useState({});
 
@@ -9,26 +9,26 @@ const Login = () => {
 
   const loginSubmit = async (e) => {
     e.preventDefault();
-    const result = await axiosApi.post(
-      "http://192.168.57.27:6000/auth/signin",
+    const result = await axios.post(
+      "http://192.168.43.217:5000/auth/signin",
       loginData
     );
-    console.log(result);
-    if (result?.data?.token ) {
-      sessionStorage.setItem("token", result.data.token);
-    
-    if (result?.data?.role) {
-      sessionStorage.setItem("role", result.data.role);
+    console.log(result.data.result);
+    if (result?.data?.result?.token) {
+       localStorage.setItem("token", result.data.result.token);
+
+      if (result?.data?.result?.role) {
+        localStorage.setItem("role", result.data.result.role);
+      }
+      if (result.data.result.role === 'admin') {
+        navigate("/addproduct");
+      }
+      if (result.data.result.role === 'tailor') {
+        navigate("/tailerpanel");
+      } else {
+        navigate("/home");
+      }
     }
-    if (result.data.role === "admin") {
-      navigate("/admin");
-    }
-    if (result.data.role === "tailor") {
-      navigate("/tailerpanel");
-    } else {
-      navigate("/");
-    }
-  }
   };
   
   return (
@@ -36,7 +36,7 @@ const Login = () => {
       <div className="formCard">
         <h2 className="form_headingText">Log In To Your Account</h2>
         <form action="" onSubmit={loginSubmit}>
-          <label for="" className="form_labelText">
+          <label htmlFor="" className="form_labelText">
             Username
           </label>
           <input
@@ -48,7 +48,7 @@ const Login = () => {
             type="text"
             placeholder="Enter your username"
           />
-          <label for="" className="form_labelText">
+          <label htmlFor="" className="form_labelText">
             Password
           </label>
           <input
@@ -61,12 +61,10 @@ const Login = () => {
             type="password"
             placeholder="Enter your password"
           />
-          <Link to="/home">
-            {" "}
+
             <button type="submit" className="form_button">
               Log In
             </button>
-          </Link>
           <Link className="form_linkText" to="/register">
             Create new account
           </Link>

@@ -21,7 +21,7 @@ const FindSize = () => {
       <div className="formCard">
         <h2 className="form_headingText">Find Your Perfect Fit!</h2>
         <form onSubmit={submitSizes} action="">
-          <label for="" className="form_labelText">
+          <label  className="form_labelText">
             Height
           </label>
           <input
@@ -31,7 +31,7 @@ const FindSize = () => {
             type="text"
             placeholder="Enter your height"
           />
-          <label for="" className="form_labelText">
+          <label  className="form_labelText">
             Weight
           </label>
           <input
