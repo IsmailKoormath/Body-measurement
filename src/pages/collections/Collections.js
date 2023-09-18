@@ -13,14 +13,14 @@ const Collections = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await axiosApi.get("/product/get/all");
-      setProducts(response.data.product);
-    }
+  
     fetchData();
   }, []);
 
-
+  async function fetchData() {
+    const response = await axiosApi.get("/product/get/user/all");
+    setProducts(response.data.product);
+  }
   const navigate = useNavigate();
   return (
     <div className="collectinPage">
@@ -30,7 +30,7 @@ const Collections = () => {
         <div className="card-container">
           {/* list of suggested products */}
           {products.map((product) => (
-            <div onClick={() => navigate("/singleproduct")} className="card">
+            <div onClick={() => navigate(`/singleproduct/${product._id}`)} className="card">
               <div className="image_section">
                 <img src={product.images[0].url} alt="" />
               </div>

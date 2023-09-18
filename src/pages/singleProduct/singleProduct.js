@@ -1,42 +1,86 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./singleProduct.css";
 
-import product from "../../assets/singleproduct.png";
+// import product from "../../assets/singleproduct.png";
 import Header from "../../Components/Header";
+import { useParams } from "react-router-dom";
+import { axiosApi } from "../../api/axios-method";
 
 const SingleProduct = () => {
+  const [singleProduct, setSingleproduct] = useState();
+  const [tailors, setTailors] = useState([]);
+  const [count, setCount] = useState(0);
+  const params = useParams();
+
+  const productId = params.id;
+
+  useEffect(() => {
+    fetchSingleProduct();
+    getalltailors();
+  }, []);
+
+  async function fetchSingleProduct() {
+    const response = await axiosApi.get(`/product/get/${productId}`);
+    console.log(response.data);
+    setSingleproduct(response.data);
+  }
+  async function getalltailors() {
+    const response = await axiosApi.get("/user/tailor/get");
+    console.log("tailors ", response.data.user);
+    setTailors(response.data.user);
+  }
+
+  // couter
+  let increaseCount = () => {
+    setCount(count + 1);
+  };
+  let decreaseCount = () => {
+    if (count > 0) {
+      setCount(count - 1);
+    }
+  };
+
   return (
     <div className="singleViewPage">
-     <Header/>
+      <Header />
       <section className="singleproduct-section">
         <div className="singleproductimg">
-          <img src={product} alt="product" />
+          <img src={singleProduct?.product?.images[0].url} alt="product" />
         </div>
         <div className="singleproducttext-section">
-          <h3>TrueBasics Heart Blue Denim Printed<br/> Shirt</h3>
+          <h3>{singleProduct?.product?.title}</h3>
           <div className="prise-size">
             <span>
               <h5>Price:</h5>
-              <h4>₹799</h4>
+              <h4>₹{singleProduct?.product?.price}</h4>
             </span>
-            <div className="product-size">M</div>
+            <div className="product-size">{singleProduct?.product?.size}</div>
           </div>
           <div className="choose-buttons">
             <div className="counter">
-              <div className="operator">-</div>
-              <div className="count">1</div>
-              <div className="operator">+</div>
+              <div onClick={decreaseCount} className="operator">
+                -
+              </div>
+              <div className="count">{count}</div>
+              <div onClick={increaseCount} className="operator">
+                +
+              </div>
             </div>
             <div className="choose-tailer">
               <select className="choose-tailer-drop" name="tailer" id="tailer">
                 <option value="tailer 1">choose tailor &nbsp;&nbsp;</option>
-                <option value="tailer 1">tailer 1</option>
+                {tailors.map((tailor) => (
+                  <option key={tailor._id} value="tailer 1">
+                    {tailor.username}
+                  </option>
+                ))}
               </select>
             </div>
             <button className="sendTailor">Sent to tailor</button>
           </div>
         </div>
       </section>
+      .
     </div>
   );
 };

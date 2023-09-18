@@ -29,7 +29,7 @@ function App() {
           <Route path="/tailerpanel" element={<Tailorpanel />} />
           <Route path="/addproduct" element={<AddProduct />} />a
           <Route path="/taileradd" element={<TailorAdd />} />
-          <Route path="/singleproduct" element={<SingleProduct />} />
+          <Route path="/singleproduct/:id" element={<SingleProduct />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -9,11 +9,13 @@ const FindSize = () => {
 
   const submitSizes =async (e) => {
     e.preventDefault();
-    const response = await axiosApi.post("", sizes);
+    const response = await axiosApi.post("/user/size/add", sizes);
     console.log('====================================');
     console.log(response);
     console.log('====================================');
-    navigate('/canvas');
+    if(response.status === 200){
+    navigate("/canvas");
+    }
   };
   
   return (
@@ -41,11 +43,9 @@ const FindSize = () => {
             type="text"
             placeholder="Enter your weight"
           />
-          <Link to="/canvas">
             <button type="submit" className="form_button">
               Proceed
             </button>
-          </Link>
         </form>
       </div>
     </div>

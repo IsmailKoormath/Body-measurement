@@ -6,7 +6,7 @@ import group from "../../assets/group.png";
 import shirt1 from "../../assets/shirt-1.png";
 // import shirt2 from "../../assets/shirt-2.png";
 // import shirt3 from "../../assets/shirt-3.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../../Components/Header";
 
 import avatar from "../../assets/avatar.svg";
@@ -14,6 +14,8 @@ import { axiosApi } from "../../api/axios-method";
 
 const Home = () => {
   const [collections, setCollections] = useState([]);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function fetchData() {
@@ -73,17 +75,10 @@ const Home = () => {
         <div className="card-container">
           {/* List  all product */}
           {collections.map((product) => (
-            <div className="card">
+            <div onClick={()=>navigate(`/singleproduct/${product._id}`)} className="card">
               <img src={product.images[0].url} alt="" />
             </div>
           ))}
-          {/* 
-          <div className="card">
-            <img src={shirt2} alt="" />
-          </div>
-          <div className="card">
-            <img src={shirt3} alt="" />
-          </div> */}
         </div>
       </section>
     </div>

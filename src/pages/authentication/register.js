@@ -10,7 +10,7 @@ const Register = () => {
   const handleRegister = async(e) => {
     e.preventDefault();
     const result = await axios.post(
-      "http://192.168.43.217:5000/auth/signup/user",
+      "http://192.168.29.217:5000/auth/signup/user",
       userdata
     );
     console.log(result);
