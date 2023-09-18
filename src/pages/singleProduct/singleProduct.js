@@ -9,7 +9,8 @@ import { axiosApi } from "../../api/axios-method";
 const SingleProduct = () => {
   const [singleProduct, setSingleproduct] = useState();
   const [tailors, setTailors] = useState([]);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
+  const [tailerId, setTailorId] = useState();
   const params = useParams();
 
   const productId = params.id;
@@ -35,11 +36,25 @@ const SingleProduct = () => {
     setCount(count + 1);
   };
   let decreaseCount = () => {
-    if (count > 0) {
+    if (count > 1) {
       setCount(count - 1);
     }
   };
 
+  const sendOrderToTailor = async () => {
+    const response = await axiosApi.post("/order/new", {
+      product: productId,
+       tailerId,
+    });
+    console.log(response.data);
+  };
+
+  const handleChange = async (e) => {
+    setTailorId({ tailor: e.target.value });
+    console.log('====================================');
+    console.log(tailerId);
+    console.log('====================================');
+  };
   return (
     <div className="singleViewPage">
       <Header />
@@ -67,16 +82,23 @@ const SingleProduct = () => {
               </div>
             </div>
             <div className="choose-tailer">
-              <select className="choose-tailer-drop" name="tailer" id="tailer">
+              <select
+                onChange={handleChange}
+                className="choose-tailer-drop"
+                name="tailer"
+                id="tailer"
+              >
                 <option value="tailer 1">choose tailor &nbsp;&nbsp;</option>
                 {tailors.map((tailor) => (
-                  <option key={tailor._id} value="tailer 1">
+                  <option key={tailor._id} value={tailor._id}>
                     {tailor.username}
                   </option>
                 ))}
               </select>
             </div>
-            <button className="sendTailor">Sent to tailor</button>
+            <button onClick={sendOrderToTailor} className="sendTailor">
+              Sent to tailor
+            </button>
           </div>
         </div>
       </section>
