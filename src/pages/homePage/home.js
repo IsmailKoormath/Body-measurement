@@ -9,13 +9,15 @@ import shirt1 from "../../assets/shirt-1.png";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../../Components/Header";
 
+import logoutIcon from "../../assets/Logout.svg";
+
 import avatar from "../../assets/avatar.svg";
 import { axiosApi } from "../../api/axios-method";
 
 const Home = () => {
   const [collections, setCollections] = useState([]);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -25,6 +27,11 @@ const Home = () => {
     }
     fetchData();
   }, []);
+
+  const handleLogout = async () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
   const role = localStorage.getItem("role");
   return (
@@ -42,6 +49,10 @@ const Home = () => {
               <Link to="/taileradd">ADD TAILOR</Link>
             </li>
           </ul>
+          <div onClick={handleLogout} className="logoutbox">
+            <img src={logoutIcon} alt="" />
+            <h5 className="logoutText">Log Out</h5>
+          </div>
           <img className="avatar-image" src={avatar} alt="" />
         </header>
       ) : (
@@ -76,7 +87,11 @@ const Home = () => {
         <div className="card-container">
           {/* List  all product */}
           {collections.map((product) => (
-            <div key={product._id} onClick={()=>navigate(`/singleproduct/${product._id}`)} className="card">
+            <div
+              key={product._id}
+              onClick={() => navigate(`/singleproduct/${product._id}`)}
+              className="card"
+            >
               <img src={product?.image?.url} alt="" />
             </div>
           ))}

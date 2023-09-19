@@ -100,7 +100,7 @@ const AddProduct = () => {
               placeholder="Enter the product title"
             />
             <label className="addTailor_labelText">Size</label>
-            <input
+            <select
               name="size"
               onChange={(e) =>
                 setProductData({
@@ -110,9 +110,15 @@ const AddProduct = () => {
               }
               value={productData.size}
               className="addTailor_textInput"
-              type="text"
               placeholder="Enter the size"
-            />
+            >
+              <option>Enter the size</option>
+              <option>Small</option>
+              <option>Medium</option>
+              <option>Large</option>
+              <option>Extra Large</option>
+              <option>Extra Extra Large</option>
+            </select>
             <label className="addTailor_labelText">Price</label>
             <input
               name="price"

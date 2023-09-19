@@ -12,6 +12,7 @@ const SingleProduct = () => {
   const [count, setCount] = useState(1);
   const [selectedTailor, setSelectedTailor] = useState("");
   const [message, setMessage] = useState("");
+  const [successmessage, setSuccessMessage] = useState("");
 
   const params = useParams();
   const productId = params.id;
@@ -19,10 +20,7 @@ const SingleProduct = () => {
   useEffect(() => {
     fetchSingleProduct();
     getalltailors();
-    console.log("====================================");
-    console.log("tailor", selectedTailor);
-    console.log("product", productId);
-    console.log("====================================");
+
   }, []);
 
   async function fetchSingleProduct() {
@@ -31,9 +29,18 @@ const SingleProduct = () => {
     setSingleproduct(response.data);
   }
   async function getalltailors() {
-    const response = await axiosApi.get("/user/tailor/get");
-    console.log("tailors ", response.data.user);
-    setTailors(response.data.user);
+    try {
+        const response = await axiosApi.get("/user/tailor/get");
+        console.log("tailors ", response.data.user);
+        setTailors(response.data.user);
+    } catch (error) {
+      if (error.response.status === 403) {
+        setMessage("your not a user");
+      } else {
+        console.log(error);
+      }
+    }
+  
   }
 
   // couter
@@ -52,6 +59,7 @@ const SingleProduct = () => {
         product: productId,
         tailor: selectedTailor,
       });
+      setSuccessMessage("send to tailor success");
       console.log(response.data);
     } catch (error) {
       if (error.response.status === 403) {
@@ -64,11 +72,8 @@ const SingleProduct = () => {
 
   const handleChange = async (e) => {
     setSelectedTailor(e.target.value);
-    console.log("====================================");
-    console.log(selectedTailor);
-    console.log(productId);
-    console.log("====================================");
   };
+
   return (
     <div className="singleViewPage">
       <Header />
@@ -117,6 +122,7 @@ const SingleProduct = () => {
             </button>
             <h5 style={{ color: "red" }}>{message}</h5>
           </div>
+          <h4 style={{ color: "green" }}>{successmessage}</h4>
         </div>
       </section>
       .

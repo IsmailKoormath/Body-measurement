@@ -4,34 +4,41 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 const Login = () => {
   const [loginData, setLoginData] = useState({});
+  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
   const loginSubmit = async (e) => {
     e.preventDefault();
-    const result = await axios.post(
-      "http://localhost:5000/auth/signin",
-      // "http://192.168.29.217:5000/auth/signin",
-      loginData
-    );
-    console.log(result.data.result);
-    if (result?.data?.result?.token) {
-       localStorage.setItem("token", result.data.result.token);
+    try {
+      const result = await axios.post(
+        // "http://localhost:5000/auth/signin",
+        "http://192.168.29.217:5000/auth/signin",
+        loginData
+      );
+      console.log(result.data.result);
+      if (result?.data?.result?.token) {
+        localStorage.setItem("token", result.data.result.token);
 
-      if (result?.data?.result?.role) {
-        localStorage.setItem("role", result.data.result.role);
+        if (result?.data?.result?.role) {
+          localStorage.setItem("role", result.data.result.role);
+        }
+        if (result.data.result.role === "admin") {
+          navigate("/addproduct");
+        }
+        if (result.data.result.role === "tailor") {
+          navigate("/tailerpanel");
+        } else {
+          navigate("/home");
+        }
       }
-      if (result.data.result.role === 'admin') {
-        navigate("/addproduct");
-      }
-      if (result.data.result.role === 'tailor') {
-        navigate("/tailerpanel");
-      } else {
-        navigate("/home");
+    } catch (error) {
+      if (error.response.status === 400) {
+        setMessage("invalid username or password");
       }
     }
   };
-  
+
   return (
     <div className="authpages">
       <div className="formCard">
@@ -62,10 +69,10 @@ const Login = () => {
             type="password"
             placeholder="Enter your password"
           />
-
-            <button type="submit" className="form_button">
-              Log In
-            </button>
+          <h5 style={{color:"red",marginTop:"10px"}}> {message}</h5>
+          <button type="submit" className="form_button">
+            Log In
+          </button>
           <Link className="form_linkText" to="/register">
             Create new account
           </Link>

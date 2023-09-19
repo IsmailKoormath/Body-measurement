@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import * as p5 from "p5";
 import ml5 from "ml5";
 
-import background from '../../assets/Background.png'
+import background from "../../assets/Background.png";
 
 const Webcam = () => {
   let capture;
@@ -15,6 +15,7 @@ const Webcam = () => {
   const navigate = useNavigate();
   const [sizeSuggestion, setSizeSuggestion] = useState(null);
   const [shoulderWidth, setShoulderWidth] = useState(null);
+  const [hipWidth, setHipWidth] = useState(null);
 
   useEffect(() => {
     const sketch = (p) => {
@@ -45,6 +46,9 @@ const Webcam = () => {
             const shoulderWidth = calculateShoulderWidth(singlePose);
             setShoulderWidth(shoulderWidth);
 
+            const hipWidth = calculateHipWidth(singlePose);
+            setHipWidth(hipWidth);
+
             // Find the suggested size based on shoulder width
             const suggestedSize = findSuggestedSize(shoulderWidth);
 
@@ -56,15 +60,13 @@ const Webcam = () => {
             // Check the score of the first keypoint
             const firstKeypointScore = singlePose.keypoints[0].score;
 
-            if (
-              firstKeypointScore >= 0.7511028087840361 &&
-              firstKeypointScore <= 0.8011028087840361
-            ) {
+            if (shoulderWidth >= 20 && shoulderWidth <= 25 && hipWidth>= 30 && hipWidth<=35) {
               removeCamera();
               clearInterval(intervalId);
               navigate(
                 `/collection/${firstKeypointScore}/${suggestedSize}/${shoulderWidth}`
               );
+              window.location.reload();
             }
           }
         });
@@ -101,32 +103,36 @@ const Webcam = () => {
       };
 
       // // Cleanup function to stop the webcam when unmounting
-      function removeCamera(){
-   p.remove = () => {
-     capture.stop();
-   };
+      function removeCamera() {
+        p.remove = () => {
+          capture.stop();
+        };
       }
-   
 
       function calculateShoulderWidth(pose) {
         const leftShoulderX = pose.keypoints[5].position.x;
         const rightShoulderX = pose.keypoints[2].position.x;
         return Math.abs(rightShoulderX - leftShoulderX);
       }
+      function calculateHipWidth(pose) {
+        const leftHipX = pose.keypoints[11].position.x; // Assuming keypoint index 11 is for the left hip
+        const rightHipX = pose.keypoints[8].position.x; // Assuming keypoint index 8 is for the right hip
+        return Math.abs(rightHipX - leftHipX);
+      }
 
       function findSuggestedSize(shoulderWidth) {
         const sizeChart = [
-          { size: "Small", shoulder: shoulderWidth <= 35 },
+          { size: "Small", shoulder: shoulderWidth <= 40 },
           {
             size: "Medium",
-            shoulder: shoulderWidth > 35 && shoulderWidth <= 40,
+            shoulder: shoulderWidth > 40 && shoulderWidth <= 45,
           },
           {
             size: "Large",
-            shoulder: shoulderWidth > 40 && shoulderWidth <= 45,
+            shoulder: shoulderWidth > 45 && shoulderWidth <= 50,
           },
-          { size: "XL", shoulder: shoulderWidth > 45 && shoulderWidth <= 50 },
-          { size: "XXL", shoulder: shoulderWidth > 50 },
+          { size: "XL", shoulder: shoulderWidth > 50 && shoulderWidth <= 55 },
+          { size: "XXL", shoulder: shoulderWidth > 55 },
         ];
 
         const matchedSizeData = sizeChart.find((sizeData) => sizeData.shoulder);
@@ -161,9 +167,10 @@ const Webcam = () => {
       {sizeSuggestion && (
         <h2 style={{ textAlign: "center", paddingTop: "100px" }}>
           recognising Size: {shoulderWidth}
+          Hip width: {hipWidth}
         </h2>
       )}
-      h<div ref={videoRef}></div>
+      <div ref={videoRef}></div>
     </div>
   );
 };
