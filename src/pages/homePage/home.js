@@ -21,6 +21,7 @@ const Home = () => {
     async function fetchData() {
       const response = await axiosApi.get("/product/get/all");
       setCollections(response.data.product);
+      console.log(response);
     }
     fetchData();
   }, []);
@@ -75,8 +76,8 @@ const Home = () => {
         <div className="card-container">
           {/* List  all product */}
           {collections.map((product) => (
-            <div onClick={()=>navigate(`/singleproduct/${product._id}`)} className="card">
-              <img src={product?.images[0]?.url} alt="" />
+            <div key={product._id} onClick={()=>navigate(`/singleproduct/${product._id}`)} className="card">
+              <img src={product?.image?.url} alt="" />
             </div>
           ))}
         </div>

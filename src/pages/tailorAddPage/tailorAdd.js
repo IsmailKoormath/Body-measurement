@@ -174,7 +174,7 @@ const TailorAdd = () => {
           <h1 className="addTailor_heading">REMOVE TAILOR</h1>
           <div className="removeTailer_card_container">
             {tailors.map((tailor) => (
-              <div className="removeTailer_card">
+              <div key={tailor._id} className="removeTailer_card">
                 <img
                   onClick={() => deletTailor(tailor._id)}
                   className="delete_icon"

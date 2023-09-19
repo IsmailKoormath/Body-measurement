@@ -11,6 +11,7 @@ const SingleProduct = () => {
   const [tailors, setTailors] = useState([]);
   const [count, setCount] = useState(1);
   const [selectedTailor, setSelectedTailor] = useState("");
+  const [message, setMessage] = useState("");
 
   const params = useParams();
   const productId = params.id;
@@ -18,10 +19,10 @@ const SingleProduct = () => {
   useEffect(() => {
     fetchSingleProduct();
     getalltailors();
-    console.log('====================================');
+    console.log("====================================");
     console.log("tailor", selectedTailor);
     console.log("product", productId);
-    console.log('====================================');
+    console.log("====================================");
   }, []);
 
   async function fetchSingleProduct() {
@@ -46,26 +47,34 @@ const SingleProduct = () => {
   };
 
   const sendOrderToTailor = async () => {
-    const response = await axiosApi.post("/order/new", {
-      product: productId,
-       tailor:selectedTailor,
-    });
-    console.log(response.data);
+    try {
+      const response = await axiosApi.post("/order/new", {
+        product: productId,
+        tailor: selectedTailor,
+      });
+      console.log(response.data);
+    } catch (error) {
+      if (error.response.status === 403) {
+        setMessage("your not a user");
+      } else {
+        console.log(error);
+      }
+    }
   };
 
   const handleChange = async (e) => {
-    setSelectedTailor( e.target.value );
-    console.log('====================================');
+    setSelectedTailor(e.target.value);
+    console.log("====================================");
     console.log(selectedTailor);
-    console.log(productId)
-    console.log('====================================');
+    console.log(productId);
+    console.log("====================================");
   };
   return (
     <div className="singleViewPage">
       <Header />
       <section className="singleproduct-section">
         <div className="singleproductimg">
-          <img src={singleProduct?.product?.images[0].url} alt="product" />
+          <img src={singleProduct?.product?.image.url} alt="product" />
         </div>
         <div className="singleproducttext-section">
           <h3>{singleProduct?.product?.title}</h3>
@@ -106,6 +115,7 @@ const SingleProduct = () => {
             <button onClick={sendOrderToTailor} className="sendTailor">
               Sent to tailor
             </button>
+            <h5 style={{ color: "red" }}>{message}</h5>
           </div>
         </div>
       </section>

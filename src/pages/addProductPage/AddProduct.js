@@ -24,6 +24,7 @@ const AddProduct = () => {
     try {
       const response = await axiosApi.get("/product/get/all");
       setProducts(response.data.product);
+      console.log(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -37,8 +38,8 @@ const AddProduct = () => {
     formData.append("size", productData.size);
     formData.append("price", productData.price);
 
-    if (productData.product) {
-      formData.append("product", productData.images);
+    if (productData.images) {
+      formData.append("images", productData.images);
     }
 
     try {
@@ -57,11 +58,11 @@ const AddProduct = () => {
     }
   };
 
-  const deleteProduct = async(productId)=>{
+  const deleteProduct = async (productId) => {
     const response = await axiosApi.post(`/product/delete/${productId}`);
     console.log(response);
     fetchData();
-  }
+  };
 
   return (
     <div className="pagebody">
@@ -156,12 +157,12 @@ const AddProduct = () => {
               <div
                 onClick={() => deleteProduct(prod._id)}
                 className="removeTailer_card"
-                key={prod.id}
+                key={prod._id}
               >
                 <img className="delete_icon" src={deleteimg} alt="delete" />
                 <div className="product_container">
                   <div className="product_image_container">
-                    <img src={prod?.images[0]?.url} alt="product" />
+                    <img src={prod?.image.url} alt="product" />
                   </div>
                   <div>
                     <h5 className="removeTailer_card_nameText">{prod.title}</h5>
