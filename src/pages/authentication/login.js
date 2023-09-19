@@ -10,7 +10,8 @@ const Login = () => {
   const loginSubmit = async (e) => {
     e.preventDefault();
     const result = await axios.post(
-      "http://192.168.29.217:5000/auth/signin",
+      "http://localhost:5000/auth/signin",
+      // "http://192.168.29.217:5000/auth/signin",
       loginData
     );
     console.log(result.data.result);

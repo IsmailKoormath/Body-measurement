@@ -12,7 +12,7 @@ const AddProduct = () => {
     title: "",
     size: "",
     price: "",
-    product: null,
+    images: null,
   });
   const [products, setProducts] = useState([]);
 
@@ -38,7 +38,7 @@ const AddProduct = () => {
     formData.append("price", productData.price);
 
     if (productData.product) {
-      formData.append("product", productData.product);
+      formData.append("product", productData.images);
     }
 
     try {
@@ -49,7 +49,7 @@ const AddProduct = () => {
         title: "",
         size: "",
         price: "",
-        product: null,
+        images: null,
       });
       fetchData();
     } catch (error) {
@@ -135,7 +135,7 @@ const AddProduct = () => {
               onChange={(e) =>
                 setProductData({
                   ...productData,
-                  product: e.target.files[0],
+                  images: e.target.files[0],
                 })
               }
               className="addTailor_textInput"
@@ -153,12 +153,15 @@ const AddProduct = () => {
           <h1 className="addTailor_heading">REMOVE PRODUCTS</h1>
           <div className="removeTailer_card_container">
             {products.map((prod) => (
-
-              <div onClick={()=>deleteProduct(prod._id)} className="removeTailer_card" key={prod.id}>
+              <div
+                onClick={() => deleteProduct(prod._id)}
+                className="removeTailer_card"
+                key={prod.id}
+              >
                 <img className="delete_icon" src={deleteimg} alt="delete" />
                 <div className="product_container">
                   <div className="product_image_container">
-                    <img src={prod.images[0].url} alt="product" />
+                    <img src={prod?.images[0]?.url} alt="product" />
                   </div>
                   <div>
                     <h5 className="removeTailer_card_nameText">{prod.title}</h5>

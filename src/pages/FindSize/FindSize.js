@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../authentication/style.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { axiosApi } from "../../api/axios-method";
 const FindSize = () => {
   const [sizes, setSizes] = useState({});

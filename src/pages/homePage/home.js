@@ -76,7 +76,7 @@ const Home = () => {
           {/* List  all product */}
           {collections.map((product) => (
             <div onClick={()=>navigate(`/singleproduct/${product._id}`)} className="card">
-              <img src={product.images[0].url} alt="" />
+              <img src={product?.images[0]?.url} alt="" />
             </div>
           ))}
         </div>

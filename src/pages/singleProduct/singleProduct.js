@@ -10,14 +10,18 @@ const SingleProduct = () => {
   const [singleProduct, setSingleproduct] = useState();
   const [tailors, setTailors] = useState([]);
   const [count, setCount] = useState(1);
-  const [tailerId, setTailorId] = useState();
-  const params = useParams();
+  const [selectedTailor, setSelectedTailor] = useState("");
 
+  const params = useParams();
   const productId = params.id;
 
   useEffect(() => {
     fetchSingleProduct();
     getalltailors();
+    console.log('====================================');
+    console.log("tailor", selectedTailor);
+    console.log("product", productId);
+    console.log('====================================');
   }, []);
 
   async function fetchSingleProduct() {
@@ -44,15 +48,16 @@ const SingleProduct = () => {
   const sendOrderToTailor = async () => {
     const response = await axiosApi.post("/order/new", {
       product: productId,
-       tailerId,
+       tailor:selectedTailor,
     });
     console.log(response.data);
   };
 
   const handleChange = async (e) => {
-    setTailorId({ tailor: e.target.value });
+    setSelectedTailor( e.target.value );
     console.log('====================================');
-    console.log(tailerId);
+    console.log(selectedTailor);
+    console.log(productId)
     console.log('====================================');
   };
   return (
@@ -83,12 +88,14 @@ const SingleProduct = () => {
             </div>
             <div className="choose-tailer">
               <select
-                onChange={handleChange}
                 className="choose-tailer-drop"
                 name="tailer"
                 id="tailer"
+                onChange={handleChange}
+                value={selectedTailor}
               >
-                <option value="tailer 1">choose tailor &nbsp;&nbsp;</option>
+                <option value="">choose tailor &nbsp;&nbsp;</option>{" "}
+                {/* Default option */}
                 {tailors.map((tailor) => (
                   <option key={tailor._id} value={tailor._id}>
                     {tailor.username}
