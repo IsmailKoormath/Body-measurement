@@ -22,7 +22,7 @@ const Home = () => {
   useEffect(() => {
     async function fetchData() {
       const response = await axiosApi.get("/product/get/all");
-      setCollections(response.data.product);
+      setCollections(response?.data?.product);
       console.log(response);
     }
     fetchData();
@@ -88,8 +88,8 @@ const Home = () => {
           {/* List  all product */}
           {collections.map((product) => (
             <div
-              key={product._id}
-              onClick={() => navigate(`/singleproduct/${product._id}`)}
+              key={product?._id}
+              onClick={() => navigate(`/singleproduct/${product?._id}`)}
               className="card"
             >
               <img src={product?.image?.url} alt="" />

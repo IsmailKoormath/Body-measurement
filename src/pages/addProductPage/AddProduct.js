@@ -23,8 +23,8 @@ const AddProduct = () => {
   async function fetchData() {
     try {
       const response = await axiosApi.get("/product/get/all");
-      setProducts(response.data.product);
-      console.log(response.data);
+      setProducts(response?.data?.product);
+      console.log(response?.data);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -168,22 +168,22 @@ const AddProduct = () => {
                 <img className="delete_icon" src={deleteimg} alt="delete" />
                 <div className="product_container">
                   <div className="product_image_container">
-                    <img src={prod?.image.url} alt="product" />
+                    <img src={prod?.image?.url} alt="product" />
                   </div>
                   <div>
-                    <h5 className="removeTailer_card_nameText">{prod.title}</h5>
+                    <h5 className="removeTailer_card_nameText">{prod?.title}</h5>
                     <div className="removeTailer_card_content">
                       <label className="removeTailer_card_label">Size :</label>
                       <span className="removeTailer_card_span">
                         {" "}
-                        {prod.size}
+                        {prod?.size}
                       </span>
                     </div>
                     <h5
                       className="removeTailer_card_nameText"
                       style={{ marginTop: "10px" }}
                     >
-                      ${prod.price}
+                      ${prod?.price}
                     </h5>
                   </div>
                 </div>

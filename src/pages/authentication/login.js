@@ -16,24 +16,24 @@ const Login = () => {
         "http://192.168.29.217:5000/auth/signin",
         loginData
       );
-      console.log(result.data.result);
+      console.log(result?.data?.result);
       if (result?.data?.result?.token) {
         localStorage.setItem("token", result.data.result.token);
 
         if (result?.data?.result?.role) {
           localStorage.setItem("role", result.data.result.role);
         }
-        if (result.data.result.role === "admin") {
+        if (result?.data?.result?.role === "admin") {
           navigate("/addproduct");
         }
-        if (result.data.result.role === "tailor") {
+        if (result.data?.result?.role === "tailor") {
           navigate("/tailerpanel");
         } else {
           navigate("/home");
         }
       }
     } catch (error) {
-      if (error.response.status === 400) {
+      if (error?.response?.status === 400) {
         setMessage("invalid username or password");
       }
     }

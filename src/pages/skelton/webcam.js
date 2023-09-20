@@ -166,8 +166,7 @@ const Webcam = () => {
       />
       {sizeSuggestion && (
         <h2 style={{ textAlign: "center", paddingTop: "100px" }}>
-          recognising Size: {shoulderWidth}
-          Hip width: {hipWidth}
+          recognising Size: {shoulderWidth}&nbsp;&nbsp; Hip width: {hipWidth}
         </h2>
       )}
       <div ref={videoRef}></div>

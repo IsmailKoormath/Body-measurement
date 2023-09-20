@@ -11,10 +11,11 @@ const Register = () => {
     e.preventDefault();
     const result = await axios.post(
       "http://192.168.29.217:5000/auth/signup/user",
+      // "http://localhost:5000/auth/signup/user",
       userdata
     );
     console.log(result);
-    if (result.status === 200) {
+    if (result?.status === 200) {
       navigate("/");
     }
     // if(result.status == 400){

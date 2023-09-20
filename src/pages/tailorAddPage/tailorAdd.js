@@ -24,8 +24,8 @@ const TailorAdd = () => {
         "/auth/signup/tailor",
         addtailorDetails
       );
-      if (result.status === 200) {
-        console.log(result.data);
+      if (result?.status === 200) {
+        console.log(result?.data);
         fetchData(); // Refresh the list of tailors after successfully adding one
         setMessage("");
         setAddTailorDetails({
@@ -36,26 +36,26 @@ const TailorAdd = () => {
         }); // Clear any previous error messages
       }
     } catch (error) {
-      if (error.response) {
+      if (error?.response) {
         // The server responded with an error status code
-        if (error.response.status === 400) {
+        if (error?.response?.status === 400) {
           setMessage("User with the same username already exists.");
         } else {
           console.error(
             "Server responded with status code:",
-            error.response.status
+            error?.response?.status
           );
-          console.error("Error response data:", error.response.data);
+          console.error("Error response data:", error?.response?.data);
         }
-      } else if (error.request) {
+      } else if (error?.request) {
         // The request was made but no response was received
         console.error(
           "Request was made, but no response was received:",
-          error.request
+          error?.request
         );
       } else {
         // Something else went wrong
-        console.error("An error occurred:", error.message);
+        console.error("An error occurred:", error?.message);
       }
     }
   };
@@ -69,9 +69,9 @@ const TailorAdd = () => {
     // try {
     const response = await axiosApi.get("/user/tailor/get");
 
-    setTailors(response.data.user);
+    setTailors(response?.data?.user);
 
-    setMessage(response.data.message);
+    setMessage(response?.data?.message);
 
     console.log(response.data);
     // } catch (error) {
@@ -114,7 +114,7 @@ const TailorAdd = () => {
                   name: e.target.value,
                 })
               }
-              value={addtailorDetails.name}
+              value={addtailorDetails?.name}
               className="addTailor_textInput"
               type="text"
               placeholder="Enter tailor’s phone number"
@@ -129,7 +129,7 @@ const TailorAdd = () => {
                   phone: e.target.value,
                 })
               }
-              value={addtailorDetails.phone}
+              value={addtailorDetails?.phone}
               className="addTailor_textInput"
               type="text"
               placeholder="Enter tailor's phone number"
@@ -144,7 +144,7 @@ const TailorAdd = () => {
                   username: e.target.value,
                 })
               }
-              value={addtailorDetails.username}
+              value={addtailorDetails?.username}
               className="addTailor_textInput"
               type="text"
               placeholder="Set tailor’s username"
@@ -158,7 +158,7 @@ const TailorAdd = () => {
                   password: e.target.value,
                 })
               }
-              value={addtailorDetails.password}
+              value={addtailorDetails?.password}
               className="addTailor_textInput"
               type="text"
               placeholder="Set tailor’s password"
@@ -174,30 +174,30 @@ const TailorAdd = () => {
           <h1 className="addTailor_heading">REMOVE TAILOR</h1>
           <div className="removeTailer_card_container">
             {tailors.map((tailor) => (
-              <div key={tailor._id} className="removeTailer_card">
+              <div key={tailor?._id} className="removeTailer_card">
                 <img
-                  onClick={() => deletTailor(tailor._id)}
+                  onClick={() => deletTailor(tailor?._id)}
                   className="delete_icon"
                   src={deleteIcon}
                   alt="delete"
                 />
-                <h5 className="removeTailer_card_nameText">{tailor.name}</h5>
+                <h5 className="removeTailer_card_nameText">{tailor?.name}</h5>
                 <div className="removeTailer_card_content">
                   <label className="removeTailer_card_label">Phone :</label>
                   <span className="removeTailer_card_span">
-                    +91 {tailor.phone}
+                    +91 {tailor?.phone}
                   </span>
                 </div>
                 <div className="removeTailer_card_content">
                   <label className="removeTailer_card_label">Username :</label>
                   <span className="removeTailer_card_span">
-                    {tailor.username}
+                    {tailor?.username}
                   </span>
                 </div>
                 <div className="removeTailer_card_content">
                   <label className="removeTailer_card_label">Password :</label>
                   <span className="removeTailer_card_span">
-                    {tailor.password}
+                    {tailor?.password}
                   </span>
                 </div>
               </div>

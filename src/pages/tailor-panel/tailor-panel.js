@@ -12,46 +12,43 @@ const Tailorpanel = () => {
 
   const navigate = useNavigate();
 
- useEffect(() => {
-   async function fetchData() {
-     try {
-       const response = await axiosApi.get("/order/get/all");
-       setOrders(response.data);
-       console.log(response.data);
-     } catch (error) {
-       console.error("Error fetching data:", error);
-     }
-   }
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axiosApi.get("/order/get/all");
+        setOrders(response?.data);
+        console.log(response?.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
 
-   fetchData();
+    fetchData();
+  }, []);
 
- }, []);
-
- const handleLogout = async () => {
-   localStorage.clear();
-   navigate("/");
- };
-
-
+  const handleLogout = async () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
   return (
     <div className="tailorPanerpage">
       <header>
         <ul>
           <li>
-            <Link href="">HOME</Link>
+            <Link to="">HOME</Link>
           </li>
           <li>
-            <Link href="">SHOP</Link>
+            <Link to="">SHOP</Link>
           </li>
           <li>
-            <Link href="">BEAUTY</Link>
+            <Link to="">BEAUTY</Link>
           </li>
           <li>
-            <Link href="">SALE</Link>
+            <Link to="">SALE</Link>
           </li>
           <li>
-            <Link href="">JOURNAL</Link>
+            <Link to="">JOURNAL</Link>
           </li>
         </ul>
         <div onClick={handleLogout} className="logoutbox">
@@ -64,40 +61,56 @@ const Tailorpanel = () => {
         <h1 className="panel_heding">TAILOR PANEL</h1>
         <div className="panel_card_container">
           {orders.map((tailor) => (
-            <div className="panel_card">
-              <div className="whatsapp_container">
-                <img className="whatsapp_image" src={whatsapp} alt="whatsapp" />
-                <div className="whatsapp_textContainer">
-                  <h5 className="whatsapp_nameText">{tailor.user.username}</h5>
-                  <p className="whatsapp_numberText">+91 {tailor.user.phone}</p>
+            <div className="panel_card" key={tailor?.user?._id}>
+              <Link to={`https://wa.me/+91${tailor?.user?.phone}`}>
+                <div className="whatsapp_container">
+                  <img
+                    className="whatsapp_image"
+                    src={whatsapp}
+                    alt="whatsapp"
+                  />
+                  <div className="whatsapp_textContainer">
+                    <h5 className="whatsapp_nameText">
+                      {tailor?.user?.username}
+                    </h5>
+                    <p className="whatsapp_numberText">
+                      +91 {tailor?.user?.phone}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Link>
               <div className="product_image_container">
-                <img src={tailor.product.image.url} alt="product" />
+                <img src={tailor?.product?.image?.url} alt="product" />
               </div>
               <div>
-                <h5 className="panel_card_nameText">{tailor.product.title}</h5>
+                <h5 className="panel_card_nameText">
+                  {tailor?.product?.title}
+                </h5>
                 <div className="panel_card_content">
                   <label className="panel_card_label">Size :</label>
-                  <span className="panel_card_span">{tailor.product.size}</span>
-                </div>
-                <div className="panel_card_content">
-                  <label className="panel_card_label">Chest :</label>
-                  <span className="panel_card_span">{tailor.user.chest}</span>
-                </div>
-                <div className="panel_card_content">
-                  <label className="panel_card_label">Shoulder :</label>
                   <span className="panel_card_span">
-                    {tailor.user.chest / 2}
+                    {tailor?.product?.size}
                   </span>
                 </div>
                 <div className="panel_card_content">
+                  <label className="panel_card_label">Chest :</label>
+                  <span className="panel_card_span">{tailor?.user?.chest}</span>
+                </div>
+                {/* <div className="panel_card_content">
+                  <label className="panel_card_label">Shoulder :</label>
+                  <span className="panel_card_span">
+                    {tailor?.user?.chest / 2}
+                  </span>
+                </div> */}
+                <div className="panel_card_content">
                   <label className="panel_card_label">Inseam :</label>
-                  <span className="panel_card_span">{tailor.user.inseam}</span>
+                  <span className="panel_card_span">
+                    {tailor?.user?.inseam}
+                  </span>
                 </div>
                 <div className="panel_card_content">
                   <label className="panel_card_label">Waist :</label>
-                  <span className="panel_card_span">{tailor.user.waist}</span>
+                  <span className="panel_card_span">{tailor?.user?.waist}</span>
                 </div>
               </div>
             </div>

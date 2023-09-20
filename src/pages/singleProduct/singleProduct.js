@@ -25,16 +25,16 @@ const SingleProduct = () => {
 
   async function fetchSingleProduct() {
     const response = await axiosApi.get(`/product/get/${productId}`);
-    console.log(response.data);
-    setSingleproduct(response.data);
+    console.log(response?.data);
+    setSingleproduct(response?.data);
   }
   async function getalltailors() {
     try {
         const response = await axiosApi.get("/user/tailor/get");
-        console.log("tailors ", response.data.user);
-        setTailors(response.data.user);
+        console.log("tailors ", response?.data?.user);
+        setTailors(response?.data?.user);
     } catch (error) {
-      if (error.response.status === 403) {
+      if (error?.response?.status === 403) {
         setMessage("your not a user");
       } else {
         console.log(error);
@@ -60,9 +60,9 @@ const SingleProduct = () => {
         tailor: selectedTailor,
       });
       setSuccessMessage("send to tailor success");
-      console.log(response.data);
+      console.log(response?.data);
     } catch (error) {
-      if (error.response.status === 403) {
+      if (error?.response?.status === 403) {
         setMessage("your not a user");
       } else {
         console.log(error);
@@ -79,7 +79,7 @@ const SingleProduct = () => {
       <Header />
       <section className="singleproduct-section">
         <div className="singleproductimg">
-          <img src={singleProduct?.product?.image.url} alt="product" />
+          <img src={singleProduct?.product?.image?.url} alt="product" />
         </div>
         <div className="singleproducttext-section">
           <h3>{singleProduct?.product?.title}</h3>
@@ -111,8 +111,8 @@ const SingleProduct = () => {
                 <option value="">choose tailor &nbsp;&nbsp;</option>{" "}
                 {/* Default option */}
                 {tailors.map((tailor) => (
-                  <option key={tailor._id} value={tailor._id}>
-                    {tailor.username}
+                  <option key={tailor?._id} value={tailor?._id}>
+                    {tailor?.username}
                   </option>
                 ))}
               </select>

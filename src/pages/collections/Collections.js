@@ -15,7 +15,7 @@ const Collections = () => {
 
   async function fetchData() {
     const response = await axiosApi.get("/product/get/user/all");
-    setProducts(response.data.product);
+    setProducts(response?.data?.product);
 
   }
   const navigate = useNavigate();
@@ -34,17 +34,18 @@ const Collections = () => {
           {/* list of suggested products */}
           {products.map((product) => (
             <div
-              onClick={() => navigate(`/singleproduct/${product._id}`)}
+              onClick={() => navigate(`/singleproduct/${product?._id}`)}
               className="card"
+              key={product?._id}
             >
               <div className="image_section">
-                <img src={product.image.url} alt="" />
+                <img src={product?.image?.url} alt="" />
               </div>
               <div className="text_section">
                 <label htmlFor="" className="card_label">
-                  {product.title}
+                  {product?.title}
                 </label>
-                <span className="card_priceText">{product.price}$</span>
+                <span className="card_priceText">{product?.price}$</span>
               </div>
             </div>
           ))}
