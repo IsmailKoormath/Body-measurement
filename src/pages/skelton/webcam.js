@@ -20,8 +20,8 @@ const Webcam = () => {
   useEffect(() => {
     const sketch = (p) => {
       p.setup = () => {
-        const canvasWidth = window.innerWidth / 3; // Reduce canvas width
-        const canvasHeight = window.innerHeight / 2; // Reduce canvas height
+        const canvasWidth = window.innerWidth / 3; // canvas width
+        const canvasHeight = window.innerHeight / 2; // canvas height
         const canvasX = (window.innerWidth - canvasWidth) / 2; // Center horizontally
         const canvasY = (window.innerHeight - canvasHeight) / 2; // Center vertically
 
@@ -111,12 +111,12 @@ const Webcam = () => {
 
       function calculateShoulderWidth(pose) {
         const leftShoulderX = pose.keypoints[5].position.x;
-        const rightShoulderX = pose.keypoints[2].position.x;
+        const rightShoulderX = pose.keypoints[6].position.x;
         return Math.abs(rightShoulderX - leftShoulderX);
       }
       function calculateHipWidth(pose) {
         const leftHipX = pose.keypoints[11].position.x; // Assuming keypoint index 11 is for the left hip
-        const rightHipX = pose.keypoints[8].position.x; // Assuming keypoint index 8 is for the right hip
+        const rightHipX = pose.keypoints[12].position.x; // Assuming keypoint index 8 is for the right hip
         return Math.abs(rightHipX - leftHipX);
       }
 
