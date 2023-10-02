@@ -65,9 +65,9 @@ const Webcam = () => {
               clearInterval(intervalId);
               navigate(
                 `/collection/${firstKeypointScore}/${suggestedSize}/${shoulderWidth}`
-              );
-              window.location.reload();
-            }
+              ).then(() => window.location.reload());
+              
+            };
           }
         });
       };

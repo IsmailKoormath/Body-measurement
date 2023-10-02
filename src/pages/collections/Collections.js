@@ -10,6 +10,7 @@ const Collections = () => {
 
   useEffect(() => {
     fetchData();
+    
   }, []);
 
   async function fetchData() {
@@ -17,7 +18,6 @@ const Collections = () => {
     setProducts(response?.data?.product);
   }
   const navigate = useNavigate();
-window.location.reload();
 
   return (
     <div className="collectinPage">
