@@ -10,8 +10,8 @@ const Register = () => {
   const handleRegister = async(e) => {
     e.preventDefault();
     const result = await axios.post(
-      "http://192.168.29.217:5000/auth/signup/user",
-      // "http://localhost:5000/auth/signup/user",
+      // "http://192.168.29.217:5000/auth/signup/user",
+      "https://fit-me-31d4.onrender.com/auth/signup/user",
       userdata
     );
     console.log(result);

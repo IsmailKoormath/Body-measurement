@@ -12,8 +12,8 @@ const Login = () => {
     e.preventDefault();
     try {
       const result = await axios.post(
-        // "http://localhost:5000/auth/signin",
-        "http://192.168.29.217:5000/auth/signin",
+        "https://fit-me-31d4.onrender.com/auth/signin",
+        // "http://192.168.29.217:5000/auth/signin",
         loginData
       );
       console.log(result?.data?.result);
