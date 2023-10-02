@@ -10,16 +10,14 @@ const Collections = () => {
 
   useEffect(() => {
     fetchData();
-
   }, []);
 
   async function fetchData() {
     const response = await axiosApi.get("/product/get/user/all");
     setProducts(response?.data?.product);
-
   }
   const navigate = useNavigate();
-
+window.location.reload();
 
   return (
     <div className="collectinPage">
