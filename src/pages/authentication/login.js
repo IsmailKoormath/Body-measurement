@@ -13,7 +13,7 @@ const Login = () => {
     try {
       const result = await axios.post(
         // "http://localhost:5000/auth/signin",
-        "https://192.168.29.217:5000/auth/signin",
+        "http://192.168.29.217:5000/auth/signin",
         loginData
       );
       console.log(result?.data?.result);
