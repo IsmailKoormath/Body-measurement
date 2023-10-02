@@ -60,7 +60,7 @@ const Webcam = () => {
             // Check the score of the first keypoint
             const firstKeypointScore = singlePose.keypoints[0].score;
 
-            if (shoulderWidth >= 30 && shoulderWidth <= 35 && hipWidth>= 50 && hipWidth<=55) {
+            if (shoulderWidth >= 50 && shoulderWidth <= 55 && hipWidth>= 30 && hipWidth<=35) {
               removeCamera();
               clearInterval(intervalId);
               navigate(
